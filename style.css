@@ -462,7 +462,7 @@ MEDIA QUERIES
 */
 
 /* ########## LARGE DEVICES - SMALL LAPTOPS ########## */
-@media (min-width: 901px) and (max-width: 1440px) { 
+@media (min-width: 901px) and (max-width: 1200px) { 
 
     /* LARGE DEVICE - GLOBALNE */
 
