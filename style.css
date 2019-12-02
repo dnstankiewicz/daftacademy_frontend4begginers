@@ -15,6 +15,20 @@ Więcej na ten temat: https://cssreset.com/what-is-a-css-reset/
 body {
     margin: 0;
     padding: 0;
+    /*
+    "background-image" - ustawiamy obrazek z projektu graficznego jako tło całej witryny
+    "background-size: cover" sprawia, że obrazek tła będzie skalowany tak, żeby wypełniać ekran w całości
+        niezależnie od proporcji ekranu
+    ""
+
+    */
+    background-image: url('./images/background.svg');
+    /*
+    */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 h1, h2, h3 {
@@ -44,29 +58,77 @@ Więcej na ten temat: https://webaim.org/techniques/css/invisiblecontent/
     overflow: hidden;
 }
 
-/* 
-Sekcja pomocnicza, aby zwizualizować pozycje głównych bloków strony. Będzie usunięta w następnych krokach.
-*/
-/* .page-header {
-    background-color: #ffb1b1;
-}
-
-.page-content {
-    background-color: #b0ffb0;
-}
-
-.page-footer {
-    background-color: #7ba3ff;
-}
-
-.content-section {
-    background-color: #ca9aca;
-}
-.content-section:nth-child(odd) {
-    background-color: #e69fe6;
-} */
 /*
-Koniec sekcji pomocniczej
+######################################
+TYPOGRAFIA
+######################################
+*/
+
+body {
+    color: rgba(204, 200, 255, 0.8);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+a {
+    color: #EF008E;
+    text-decoration: none;
+}
+
+/*
+######################################
+PRZYCISKI
+######################################
+*/
+
+.button {
+    padding: 7px 15px;
+    border-radius: 3px;
+    background-color: rgba(204, 200, 255, 0.1);
+    border-color: rgba(204, 200, 255, 0.1);
+
+    color: rgba(204, 200, 255, 0.8);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    cursor: pointer;
+}
+
+.button--contact {
+    margin-top: 20px;
+}
+
+/*
+######################################
+FORMULARZE
+######################################
+*/
+
+.form__field {
+    margin-bottom: 10px;
+}
+
+.form__label {
+    display: block;
+    margin-bottom: 9px;
+}
+
+.form__input {
+    display: block;
+    height: 35px;
+    width: 300px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(219, 216, 251, 0.1);
+}
+
+/*
+######################################
+GŁÓWNY LAYOUT STRONY
+######################################
 */
 
 /*
@@ -95,161 +157,118 @@ o 50px, więc można założyć, że 220px marginesu będzie wartością stosunk
 Z kolei spady (padding) nadane na kontener wyznaczają minimalną odległość, na jaką będzie oddalona
 treść strony od otaczających ją granic kontenera (wartość "0 10%" jest
 skrótem od padding-top: 0, padding-bottom: 0, padding-left: 10%, padding-right: 10%).
+Więcej skrótów paddingu: https://developer.mozilla.org/en-US/docs/Web/CSS/padding
 Właściwość "text-align: right" przykleja zawartość do prawej strony
 (oddziałuje na elementy, które są elementami inline'owymi, np. tekst, znaczniki <a>, <span> czy elementy z nadanym stylem "display: inline-block").
 */
 .page-content {
     margin-left: 220px;
     padding: 0 10%;
-    text-align: right;
 }
+
+/*
+######################################
+NAWIGACJA
+######################################
+*/
+
+.page-navigation__items {
+    padding-top: 15px;
+}
+
+.page-navigation__link {
+    line-height: 30px;
+    text-transform: uppercase;
+    letter-spacing: 6.7px;
+}
+
+/*
+######################################
+LINKI DO SOCIAL MEDIA
+######################################
+*/
+
+
+.social-links__item + .social-links__item {
+    margin-top: 15px;
+}
+
+.social-links__img {
+    width: 20px;
+    height: 20px;
+}
+
+/*
+######################################
+STYLE WSPÓLNE DLA WSZYSTKICH SEKCJI
+######################################
+*/
 
 /*
 Projekt graficzny zakłada, że każda sekcja strony będzie wypełniać całą wysokość okna przeglądarki
 lub więcej, jeśli zawartość danej sekcji jest wyższa. Dlatego świetnym rozwiązaniem
 będzie użycie jednostki "vh", która oznacza 1% wysokości okna przeglądarki z właściwością "min-height",
 która wymusza wysokość elementu na zadaną wartość lub wyższą.
+
+Następnie sekcje zostają zdefiniowane jako kontener flexbox (display: flex) co pozwala
+na większą kontrolę nad zachowaniem elementów wewnątrz.
+Zakładamy, ze każda sekcja strony ma bazową strukturę w formacie:
+
+    <section class="content-section">
+        <h2 class="content-section__header">{nagłówek sekcji}</h2>
+        <div class="content-section__body">
+            {zawartość sekcji}
+        </div>
+    </section>
 */
 .content-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     min-height: 100vh;
-    padding-bottom: 80px;
-}
-
-/* --------------------------------  START  -------------------------------- */
-
-/* GENERAL SETTINGS */
-
-html {
-    background-image: url("./images/background.svg");
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
 }
 
 .content-section__header {
-    font-family: 'Open Sans';
-    font-weight: 700;
+    margin-bottom: 60px;
+    color: #EF008E;
     font-size: 28px;
-    letter-spacing: 3.8px;
-    color: #EC008C;
+    font-weight: bold;
+    letter-spacing: 4.5px;
     text-transform: uppercase;
-    padding: 40px 0;
 }
 
-
-/* SIDEBAR MENU */
-
-
-/* SIDEBAR MENU - PAGE NAV */
-
-.page-navigation {
-    margin-top: 15px;
+.content-section__body {
+    flex-grow: 1;
 }
 
-.page-navigation__item {
-    margin: 10px 0;
-}
+/*
+######################################
+SEKCJA "HOME"
+######################################
+*/
 
-.page-navigation a {
-    color: rgba(236,0,140,0.8);
-    font-family: 'Open Sans';
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 6.7px;
-    text-decoration: none;
-    text-transform: uppercase;
-    opacity: 0.7;
-}
-
-.page-navigation a:disabled{
-    color: rgba(236,0,140,0.4);
-}
-
-.page-navigation a:visited{
-    color: rgba(236,0,140,0.6);
-    font-family: Helvetica;
-    letter-spacing: 6.5px;
-}
-
-.page-navigation a:active,a:focus,a:hover{
-    color: rgba(236,0,140,1);
-    opacity: 1;
-}
-
-.page-navigation a:active{
-    font-family: Helvetica;
-}
-
-
-/* SIDEBAR MENU - SOCIAL LINKS */
-
-.social-links__image {
-    width: 20px;
-    margin-bottom: 10px;
-    opacity: 0.7;
-}
-
-.social-links__image:hover {
-    opacity: 1;
-}
-
-
-/* BUTTONS */
-
-.button {
-    font-family: 'Open Sans';
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(204, 200, 255, 0.6);
-    background-color: rgba(204, 200, 255, 0.1);
-    text-transform: uppercase;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 10px;
-    letter-spacing: 2px;
-}
-
-.button:hover, .button:active {
-    background-color: rgba(204, 200, 255, 0.3);
-}
-
-.button:focus {
-    border-color: rgba(204, 200, 255, 0.5);
-}
-
-.button:disabled {
-    opacity: 0.1;
-}
-
-
-/* HOME SECTION */
-
-.band-members {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
+.content-section.home-section {
     align-items: center;
 }
 
-.band-members__name {
-    font-family: 'Open Sans';
+.band-members {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.band-members__name{
     font-size: 15px;
     font-weight: 700;
-    color: rgba(204, 200, 255, 0.8);
     text-transform: uppercase;
-    text-align: left;
     letter-spacing: 3.8px;
     transform: translate(20px,20px);
     opacity: 0;
 }
 
-.band-members__desc {
-    font-family: 'Open Sans';
-    font-size: 13px;
-    font-weight: 400;
+.band-members__desc{
     color: rgba(204, 200, 255, 0.5);
-    text-align: left;
     letter-spacing: 3.5px;
     transform: translate(20px,10px);
     opacity: 0;
@@ -263,153 +282,790 @@ html {
     opacity: 1;
 }
 
+/*
+######################################
+SEKCJA "ABOUT"
+######################################
+*/
 
-/* ABOUT SECTION */
+/*
+Żeby ustawić opis zespołu w rogu zdjęcia, można zastosować popularną sztuczkę z pozycjonowaniem.
+Wykorzystuje ona właściwość elementów z "position: absolute", których położenie jest ustalane
+względem najbliższego mu rodzica, który jest pozycjonowany (ma ustawione "position" na inne
+niż "static", czyli "absolute", "relative", "fixed" lub "sticky").
 
-.about-section {
+Dlatego gdy na jego rodzica "about" ustawimy "position: relative" (które bez parametrów
+dodatkowych top, left, bottom, right, nic nie zmienia w jego pozycji), to zawarty w nim
+element "about__desc" ustawia się absolutnie względem niego.
+
+Gdy dodamy wartości "left: -290px" i "bottom: -115px", wtedy "about__desc" będzie wystawać
+z lewego dolnego rogu "about" dokładnie o te odległości.
+
+Natomiast aby nie dopuścić do sytuacji, że wystający "about__desc" nachodził
+na sąsiadujące sekcje na stronie, nadajemy "about" marginesy adekwatne do odległości
+podane przy pozycjonowaniu "about_desc".
+*/
+.about {
     position: relative;
+    margin-left: 290px;
+    margin-bottom: 115px;
 }
 
-.about-section img {
-    border-top: 3px solid #EC008C;
-    width: 70%;
-    height: auto;
+.about__image {
+    max-width: 100%;
+    border-top: 3px solid #EF008E;
 }
 
-.about-section__desc {
-    position: absolute;
-    background-color: rgba(37, 7, 46, 1);
-    border-bottom: 3px solid #EC008C;
-    font-family: 'Open Sans';
-    text-align: left;
-    
-    width: 350px;
-    left: 40px;
-    bottom: 10px;
-    padding: 30px;
-}
-
-.about-section__desc-header{
+.about__desc-header {
+    margin-bottom: 30px;
+    color: #CCC8FF;
     font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 3.8px;
-    color: rgba(204, 200, 255, 1);
+    font-weight: bold;
     text-transform: uppercase;
-    padding-bottom: 10px;
 }
 
-.about-section__desc-details{
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(204, 200, 255, 0.6);
-    letter-spacing: 1.5px;
-    line-height: 1.5;
+.about__desc {
+    position: absolute;
+    left: -290px;
+    bottom: -115px;
+    width: 380px;
+    padding: 30px;
+    background-color: #25072e;
+    border-bottom: 3px solid #EF008E;
 }
 
-
-/* CONCERTS SECTION */
+/*
+######################################
+SEKCJA "CONCERTS"
+######################################
+*/
 
 .concerts {
+    width: 80%;
     display: grid;
-    grid-template-columns: repeat(2,400px);
-    gap: 40px;
-    justify-content: flex-end;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 55px;
+    row-gap: 45px;
 }
 
 .concerts__image {
     max-width: 100%;
-    border-bottom: 2.5px solid #EC008C;
-    margin-bottom: 10px;
-}
-
-.concerts__date, .concerts__location {
-    font-family: 'Open Sans';
-    font-size: 15px;
-    letter-spacing: 3.5px;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-}
-
-.concerts__date {
-    color: rgba(204, 200, 255, 1);
-}
-
-.concerts__location {
-    color: rgba(204, 200, 255, 0.5);
+    border-bottom: 3px solid #EF008E;
 }
 
 .concerts__info {
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
 }
 
-.concerts__info .button {
-    position: absolute;
-    right: 0px;
-    top: 50%;
-    transform: translate(0%,-40%);
+.concerts__info-base {
+    flex-grow: 1;
 }
 
-
-/* VIDEO SECTION */
-
-#video iframe {
-    border-top: 3px solid #EC008C;
+.concerts__date {
+    margin: 0;
+    color: #CCC8FF;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3.8px;
 }
 
-
-/* GALLERY SECTION */
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 15px;
+.concerts__location {
+    margin: 0;
+    letter-spacing: 3.8px;
 }
 
-.gallery .gallery__image {
-    width: 100%;
-    border-top: 3px solid #EC008C;
+/*
+######################################
+SEKCJA "VIDEO"
+######################################
+*/
+
+.embedded-video {
+    border-top: 3px solid #EF008E;
 }
 
+/*
+######################################
+SEKCJA "PHOTOS"
+######################################
+*/
 
-/* CONTENT SECTION */
+@supports not (display: grid){
+    .gallery {
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    
+    .gallery__item {
+        width: 30%;
+        height: auto;
+        margin: 0 0 15px 15px;
+    }
+    
+    .gallery__image {
+        width: 100%;
+        border-top: 3px solid #ef008e;
+    }
+}
+
+@supports (display: grid){
+    .gallery {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .gallery__image {
+        max-width: 100%;
+        border-top: 3px solid #EF008E;
+    }
+}
+
+/*
+######################################
+SEKCJA "CONTACT"
+######################################
+*/
 
 .contact {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    text-align: left;
-    font-family: 'Open Sans';
-    color: rgb(204, 200, 255, 0.8);
-    letter-spacing: 2px;
-    font-size: 13px;
-}
-
-.contact__adress{
-    align-self: center;
-    padding-left: 50px;
-}
-
-.contact .gallery__image {
-    padding-bottom: 50px;
-}
-
-.contact .form__field {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-.contact .form__input {
-    width: 300px;
-    height: 30px;
-    margin-top: 10px;
-    border-style: none;
-    border-radius: 4px;
-    background-color: rgb(204, 200, 255, 0.1);
-    color: rgb(204, 200, 255, 0.8);
+.contact__img {
+    max-width: 100%;
 }
 
-.contact .button {
-    margin-top: 20px;
-    width: fit-content;
+.contact__address {
+    padding: 70px;
+    font-style: normal;
+}
+
+.contact__form {
+    flex-basis: 50%;
+    padding-top: 40px;
+}
+
+/*
+######################################
+MEDIA QUERIES
+######################################
+*/
+
+/* ########## LARGE DEVICES - SMALL LAPTOPS ########## */
+@media (min-width: 901px) and (max-width: 1440px) { 
+
+    /* LARGE DEVICE - GLOBALNE */
+
+    .content-section {
+        align-items: center;
+        padding: 25px 0 50px 0;
+        /* min-height: auto; */
+    }
+
+    .content-section__header {
+        margin-bottom: 30px;
+    }
+
+    /* LARGE DEVICE - HEAD, NAV, FOOTER */
+
+    .page-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    }
+
+    .page-brand {
+        text-align: center;
+    }
+
+    .page-header {
+        position: static;
+        padding: 50px 0 50px 0;
+    }
+
+    .page-navigation__item {
+        text-align: center;
+    }
+
+    .page-navigation__link {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .page-footer {
+        position: static;
+        padding: 50px;
+    }
+
+    /* LARGE DEVICE - BUTTONS */
+
+    .button {
+        padding: 10px 25px;
+        margin-top: 20px;
+    }
+
+    .button--contact {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* LARGE DEVICE - HOME */
+
+    .band-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .band-members__item {
+        padding-bottom: 20px;
+    }
+
+    /* LARGE DEVICE - ABOUT */
+
+    .about, .about__desc {
+        position: static;
+        margin: 0;
+        width: 640px;
+    }
+
+    /* LARGE DEVICE - CONCERTS */
+
+    .concerts {
+        width: 70%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        column-gap: 30px;
+        padding: 0 30px;
+    }
+
+    .concerts__info {
+        flex-direction: column;
+    }
+
+    .concerts__info-base {
+        text-align: center;
+    }
+
+    /* LARGE DEVICE - VIDEO */
+
+    .embedded-video {
+        width: 70%;
+    }
+
+    /* LARGE DEVICE - PHOTOS */
+
+    .gallery {
+        display: grid;
+        width: 70%;
+        /* width: auto; */
+    }
+
+    .gallery__item{
+        margin: 10px 0 10px 0;
+    }
+
+    .gallery__image{
+        width: 100%;
+    }
+
+    /* LARGE DEVICE - CONTACT */
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+
+    .contact__item{
+        width: 70%;
+    }
+
+    .contact__img{
+        width: 100%;
+    }
+
+    .contact__address {
+        padding: 20px;
+    }
+
+    .contact__form {
+        padding-top: 10px;
+    }
+
+    /* LARGE DEVICE - SOCIAL MEDIA */
+
+    .social-links {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .social-links__img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-links__item + .social-links__item {
+        margin: 0;
+    }        
+}
+
+/* ########## MEDIUM DEVICES - TABLETS ########## */
+@media (min-width: 701px) and (max-width: 900px) { 
+
+    /* MEDIUM DEVICE - GLOBALNE */
+
+    .content-section {
+        align-items: center;
+        padding: 25px 0 50px 0;
+    }
+
+    .content-section__header {
+        margin-bottom: 30px;
+    }
+
+   /* MEDIUM DEVICE - HEAD, NAV, FOOTER */
+
+   .page-content {
+       margin: 0;
+       padding: 0;
+       width: 100%;
+    }
+
+    .page-brand {
+        text-align: center;
+    }
+
+    .page-header {
+        position: static;
+        padding: 50px 0 50px 0;
+    }
+
+    .page-navigation__item {
+        text-align: center;
+    }
+
+    .page-navigation__link {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .page-footer {
+        position: static;
+        padding: 50px;
+    }
+
+    /* MEDIUM DEVICE - BUTTONS */
+
+    .button {
+        padding: 10px 25px;
+        margin-top: 20px;
+    }
+
+    .button--contact {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* MEDIUM DEVICE - HOME */
+
+    .band-members {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+
+    }
+
+    .band-members__item {
+        padding-bottom: 20px;
+    }
+
+    /* MEDIUM DEVICE - ABOUT */
+
+    .about, .about__desc {
+        position: static;
+        margin: 0;
+        width: 700px;
+    }
+
+    /* MEDIUM DEVICE - CONCERTS */
+
+    .concerts {
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        column-gap: 30px;
+        padding: 0 30px;
+    }
+
+    .concerts__info {
+        flex-direction: column;
+    }
+
+    .concerts__info-base {
+        text-align: center;
+    }
+
+    /* MEDIUM DEVICE - VIDEO */
+
+    .embedded-video {
+        width: 80%;
+    }
+
+    /* MEDIUM DEVICE - PHOTOS */
+
+    .gallery {
+        display: grid;
+        width: 80%;
+    }
+
+    .gallery__item{
+        margin: 10px 0 10px 0;
+    }
+
+    .gallery__image{
+        width: 100%;
+    }
+
+    /* MEDIUM DEVICE - CONTACT */
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .contact__item {
+        width: 70%;
+    }
+
+    .contact__img{
+        width: 100%;
+    }
+
+    .contact__address {
+        padding: 20px;
+    }
+
+    .contact__form {
+        padding-top: 10px;
+    }
+
+    /* MEDIUM DEVICE - SOCIAL MEDIA */
+
+    .social-links {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .social-links__img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-links__item + .social-links__item {
+        margin: 0;
+    }    
+ }
+
+/* ########## SMALL DEVICES - PHONES LANDSCAPE ########## */
+@media (min-width: 441px) and (max-width: 700px) {
+
+    /* LANDSCAPE PHONE - GLOBALNE */
+
+    .content-section {
+        align-items: center;
+        padding: 20px 0 50px 0;
+    }
+
+    /* LANDSCAPE PHONE - HEAD, NAV, FOOTER */
+
+    .page-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    }
+
+    .page-brand {
+        text-align: center;
+    }
+
+    .page-header {
+        position: static;
+        padding: 50px 0 50px 0;
+    }
+
+    .page-navigation__item {
+        text-align: center;
+    }
+
+    .page-navigation__link {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .page-footer {
+        position: static;
+        padding: 50px;
+    }
+
+    /* LANDSCAPE PHONE - BUTTONS */
+
+    .button {
+        padding: 10px 30px;
+        margin-top: 20px;
+    }
+
+    .button--contact {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* LANDSCAPE PHONE - HOME */
+
+    .band-members {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .band-members__item {
+        padding-bottom: 20px;
+    }
+
+    /* LANDSCAPE PHONE - ABOUT */
+
+    .about, .about__desc {
+        position: static;
+        margin: 0;
+        width: 100%;
+    }
+
+    /* LANDSCAPE PHONE - CONCERTS */
+
+    .concerts {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .concerts__info {
+        flex-direction: column;
+    }
+
+    .concerts__info-base {
+        text-align: center;
+    }
+
+    /* LANDSCAPE PHONE - VIDEO */
+
+    .embedded-video {
+        width: 100%;
+    }
+
+    /* LANDSCAPE PHONE - PHOTOS */
+
+    /* .gallery {
+        display: block;
+        width: auto;
+    } */
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .gallery__item{
+        margin: 10px 0 10px 0;
+    }
+
+    .gallery__image{
+        width: 100%;
+    }
+
+    /* LANDSCAPE PHONE - CONTACT */
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact__address {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .contact__form {
+        padding-top: 10px;
+    }
+
+    /* LANDSCAPE PHONE - SOCIAL MEDIA */
+
+    .social-links {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .social-links__img {
+        width: 30px;
+        height: auto;
+    }
+
+    .social-links__item + .social-links__item {
+        margin: 0;
+    }    
+
+}
+
+/* ########## SMALL DEVICES - PHONES PORTRAIT ########## */
+@media (max-width: 440px) {
+
+    /* PHONES PORTRAIT - GLOBALNE */
+
+    .content-section {
+        align-items: center;
+        padding: 25px 0 50px 0;
+    }
+
+
+   /* PHONES PORTRAIT - HEAD, NAV, FOOTER */
+
+   .page-content {
+       margin: 0;
+       padding: 0;
+       width: 100%;
+    }
+
+    .page-brand {
+        text-align: center;
+    }
+
+    .page-header {
+        position: static;
+        padding: 25px 0 50px 0;
+    }
+
+    .page-navigation__item {
+        text-align: center;
+    }
+
+    .page-navigation__link {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .page-footer {
+        position: static;
+        padding: 50px;
+    }
+
+    /* PHONES PORTRAIT - BUTTONS */
+
+    .button {
+        padding: 10px 25px;
+        margin-top: 20px;
+    }
+
+    .button--contact {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* PHONES PORTRAIT - HOME */
+
+    .band-members {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .band-members__item {
+        padding-bottom: 20px;
+    }
+
+    /* PHONES PORTRAIT - ABOUT */
+
+    .about, .about__desc {
+        position: static;
+        margin: 0;
+        width: 360px;
+    }
+
+    /* PHONES PORTRAIT - CONCERTS */
+
+    .concerts {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .concerts__info {
+        flex-direction: column;
+    }
+
+    .concerts__info-base {
+        text-align: center;
+    }
+
+    /* PHONES PORTRAIT - VIDEO */
+
+    .embedded-video {
+        width: 100%;
+    }
+
+    /* PHONES PORTRAIT - PHOTOS */
+
+    .gallery {
+        display: block;
+        width: 100%;
+    }
+
+    .gallery__item{
+        margin: 10px 0 10px 0;
+    }
+
+    .gallery__image{
+        width: 100%;
+    }
+
+    /* PHONES PORTRAIT - CONTACT */
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact__address {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .contact__form {
+        padding-top: 10px;
+    }
+
+    /* PHONES PORTRAIT - SOCIAL MEDIA */
+
+    .social-links {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .social-links__item + .social-links__item {
+        margin: 0;
+    }    
+
 }
