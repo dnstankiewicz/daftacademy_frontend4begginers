@@ -4,12 +4,13 @@ HAMBURGER MENU
 ######################################
 */
 
-const hamburgerMenu = document.querySelector('.hamburger');
+const hamburgerMenu = document.querySelector('.hamburgerMenuIcon');
 const navigationPanel = document.querySelector('.page-navigation');
 const navigationLinks = document.querySelectorAll('.page-navigation__item');
 
 
 const toggleHamburgerMenu = () => {
+    hamburgerMenu.classList.toggle('hamburgerMenuIcon--active');
     navigationPanel.classList.toggle('page-navigation--active');
 };
 
@@ -18,7 +19,7 @@ navigationLinks.forEach(
     navigationSingleLink => {
         navigationSingleLink.addEventListener('click',toggleHamburgerMenu);
     }
-)
+);
 
 
 /*
@@ -27,19 +28,21 @@ ZMIANA PRZYCISKU
 ######################################
 */
 
-const ticketAllButtons = document.querySelectorAll('.concerts__button');
+const concerts = document.querySelector('#concerts');
 
-ticketAllButtons.forEach(
-        ticketSingleButton => {
-            ticketSingleButton.addEventListener('click', () => {
-                ticketSingleButton.style.pointerEvents = 'none';
-                ticketSingleButton.style.border = 'none';
-                ticketSingleButton.style.backgroundColor = 'transparent';
-                ticketSingleButton.textContent = 'Have fun!';        
-            })
-        }
-);
+concerts.addEventListener('click', (e) => {
+    if(e.target.classList.contains('concerts__button')){
+        const buyTicketButton = e.target;
+        const haveFunText = document.createElement('p');
+        haveFunText.textContent = "Have fun!";
 
+        // const buttonContainer = buyTicketButton.parentElement;
+        // buttonContainer.insertBefore(haveFunText,buyTicketButton);
+        // buyTicketButton.remove();
+
+        buyTicketButton.replaceWith(haveFunText);
+    }
+});
 
 /*
 ######################################
@@ -63,11 +66,3 @@ form.addEventListener('submit', (Event) => {
     formInputValues[0].value= null;
     formInputValues[1].value= null;
 });
-
-
-
-
-
-
-
-
